@@ -8,7 +8,7 @@ const stores = {};
 
 Object.assign(document.body.style, {
   margin: 'auto',
-  'background-color': '#222',
+  'background-color': '#fff',
   'max-width': '900px',
   'font-family': 'Helvetica',
 });
