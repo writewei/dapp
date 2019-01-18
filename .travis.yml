@@ -1,0 +1,16 @@
+dist: xenial
+
+sudo: required
+
+language: node_js
+node_js:
+  10
+
+jobs:
+  include:
+    - stage: build
+      if: branch != master
+      script: npm run build
+    - stage: deploy
+      if: branch = master
+      script: ./scripts/deploy.sh
