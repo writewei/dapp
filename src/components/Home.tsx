@@ -2,7 +2,7 @@ import React from 'react';
 import MDContainer from './MDContainer';
 import styled from 'styled-components';
 import { inject } from 'mobx-react';
-import cidbadge from 'cidbadge';
+import ButtonHeader from './ButtonHeader';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -67,7 +67,7 @@ export default class Home extends React.Component<{
   render() {
     return (
       <>
-        <span dangerouslySetInnerHTML={{ __html: cidbadge(this.state.cid)}} />
+        <ButtonHeader cid={this.state.cid} />
         <TextInput onChange={this.contentChanged} value={this.state.content} />
         <MDContainer content={this.state.content} />
       </>
