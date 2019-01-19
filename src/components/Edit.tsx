@@ -7,8 +7,13 @@ import EthereumStore from '../stores/EthereumStore';
 import DocumentStore from '../stores/DocumentStore';
 import CIDBadge from './CIDBadge';
 import { withRouter } from 'react-router-dom';
-import { DocumentPreview } from './Home';
 import Loader from 'react-loader-spinner'
+
+const DocumentPreview = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  padding: 8px;
+  margin-top: 8px;
+`;
 
 const TextInput = styled.textarea`
   width: 100%;

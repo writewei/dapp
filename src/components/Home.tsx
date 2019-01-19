@@ -4,6 +4,7 @@ import DocumentStore, { Document } from '../stores/DocumentStore';
 import styled from 'styled-components';
 import CIDBadge from './CIDBadge';
 import WeiDisplay from './WeiDisplay';
+import Edit from './Edit';
 
 export const DocumentPreview = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
@@ -29,6 +30,7 @@ export default class Home extends React.Component<{
             </DocumentPreview>
           );
         })}
+        <Edit />
       </>
     );
   }

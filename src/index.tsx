@@ -16,6 +16,7 @@ const stores = {
     config: {
       Bootstrap: [
         // '/dns4/ipfs.writewei.io/tcp/443/ipfs/QmcETnG5Ug4RnV9tTmjLkg1YabvEVw1gwQwGinCoFZLMWk'
+        // '/ip4/127.0.0.1/tcp/4003/ws/ipfs/QmSGen7cLwrzPww5DJXTERRAxHxn3Jjay6asyVaNhwnLjo'
       ]
     }
   }),
@@ -40,7 +41,10 @@ ReactDOM.render(
     <Router>
       <Container>
         <>
-          <Route path="/" component={Home} />
+          <h1>
+            writewei
+          </h1>
+          <Route path="/" component={Home} exact />
           <Route path="/edit" component={Edit} />
         </>
       </Container>
