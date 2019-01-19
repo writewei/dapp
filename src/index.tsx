@@ -9,6 +9,7 @@ import IPFS from 'ipfs';
 import _cidhook from './stores/cidhook';
 import EthereumStore from './stores/EthereumStore';
 import DocumentStore from './stores/DocumentStore';
+import styled from 'styled-components';
 
 const stores = {
   node: new IPFS({
@@ -30,13 +31,19 @@ Object.assign(document.body.style, {
   'font-family': 'Helvetica',
 });
 
+const Container = styled.div`
+  margin: 8px;
+`;
+
 ReactDOM.render(
   <Provider { ...stores }>
     <Router>
-      <>
-        <Route path="/" component={Home} />
-        <Route path="/edit" component={Edit} />
-      </>
+      <Container>
+        <>
+          <Route path="/" component={Home} />
+          <Route path="/edit" component={Edit} />
+        </>
+      </Container>
     </Router>
   </Provider>,
   document.getElementById('app')

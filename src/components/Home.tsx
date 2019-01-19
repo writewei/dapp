@@ -6,8 +6,9 @@ import CIDBadge from './CIDBadge';
 import WeiDisplay from './WeiDisplay';
 
 const DocumentPreview = styled.div`
-  margin: 8px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  padding: 8px;
+  margin-top: 8px;
 `;
 
 @inject('ethereum', 'documentStore')
