@@ -6,6 +6,8 @@ import _cidhook from '../stores/cidhook';
 import EthereumStore from '../stores/EthereumStore';
 import DocumentStore from '../stores/DocumentStore';
 import CIDBadge from './CIDBadge';
+import { withRouter } from 'react-router-dom';
+import { DocumentPreview } from './Home';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -41,11 +43,14 @@ A bit smaller
 
 @inject('node', 'cidhook', 'documentStore', 'ethereum')
 @observer
-export default class Edit extends React.Component<{
+class Edit extends React.Component<{
   node: any,
   cidhook?: _cidhook,
   documentStore?: DocumentStore,
-  ethereum?: EthereumStore
+  ethereum?: EthereumStore,
+  location: {
+    pathname: string
+  }
 }> {
   state = {
     content: DEFAULT_TEXT,
@@ -54,6 +59,18 @@ export default class Edit extends React.Component<{
 
   componentDidMount() {
     this.calculateCid();
+
+    const { pathname } = this.props.location;
+    // Example pathname: /edit/cid
+    const parts = pathname.split('/').filter(_ => _);
+    if (!parts.length || parts.shift() !== 'edit') return;
+    if (!parts.length) return;
+    const pathCid = parts[0];
+    setTimeout(() => {
+      this.props.node.files.get(pathCid, (err: any, file: any) => {
+        console.log(err, file);
+      });
+    }, 1000);
   }
 
   calculateCid = () => {
@@ -90,10 +107,8 @@ export default class Edit extends React.Component<{
         }
         const cid = data[0].path;
         this.setState({ cid });
-        this.props.cidhook.pin(cid);
-        if (!dryRun) {
-          console.log(`pinned ipfs cid: ${data[0].path}`);
-        }
+        this.props.cidhook.pin(cid)
+          .then(() => console.log(`cidhooked: ${data[0].path}`));
       }
     );
   };
@@ -105,17 +120,24 @@ export default class Edit extends React.Component<{
   render() {
     return (
       <>
-        <Container>
-          <CIDBadge cid={this.state.cid} />
-          <a href={`https://ipfs.io/ipfs/${this.state.cid}`}>{this.state.cid}</a>
-          <div>
-            <button onClick={() => this.pinContent(false)}>pin</button>
-            <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
-          </div>
-        </Container>
-        <TextInput onChange={this.contentChanged} value={this.state.content} />
-        <MDContainer content={this.state.content} />
+        <DocumentPreview>
+          <TextInput onChange={this.contentChanged} value={this.state.content} />
+        </DocumentPreview>
+        <DocumentPreview>
+          <Container>
+            <CIDBadge cid={this.state.cid} />
+            <div>
+              <button onClick={() => this.pinContent(false)}>pin</button>
+              <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
+            </div>
+            </Container>
+          </DocumentPreview>
+        <DocumentPreview>
+          <MDContainer content={this.state.content} />
+        </DocumentPreview>
       </>
     );
   }
 }
+
+export default withRouter((props: any) => <Edit { ...props } />);

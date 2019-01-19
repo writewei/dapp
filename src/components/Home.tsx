@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import CIDBadge from './CIDBadge';
 import WeiDisplay from './WeiDisplay';
 
-const DocumentPreview = styled.div`
+export const DocumentPreview = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
   padding: 8px;
   margin-top: 8px;
@@ -20,9 +20,6 @@ export default class Home extends React.Component<{
   render() {
     return (
       <>
-        <h1>
-          writewei
-        </h1>
         {this.props.documentStore.documents.map((document: Document) => {
           console.log('test', document);
           return (
