@@ -1,7 +1,7 @@
 import cidhook from 'cidhook';
 
 export default class _cidhook {
-  public url: string = 'https://cidhookd.writewei.io';
+  public url: string = 'http://localhost:3000';
 
   async pin(cid: string) {
     return await cidhook.pin(this.url, cid);
