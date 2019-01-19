@@ -8,6 +8,7 @@ import DocumentStore from '../stores/DocumentStore';
 import CIDBadge from './CIDBadge';
 import { withRouter } from 'react-router-dom';
 import { DocumentPreview } from './Home';
+import Loader from 'react-loader-spinner'
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -54,7 +55,8 @@ class Edit extends React.Component<{
 }> {
   state = {
     content: DEFAULT_TEXT,
-    cid: ''
+    cid: '',
+    isPinning: false
   };
 
   componentDidMount() {
@@ -67,8 +69,14 @@ class Edit extends React.Component<{
     if (!parts.length) return;
     const pathCid = parts[0];
     setTimeout(() => {
-      this.props.node.files.get(pathCid, (err: any, file: any) => {
-        console.log(err, file);
+      this.props.node.files.get(pathCid, (err: any, files: any) => {
+        if (err) {
+          console.log('Error loading path cid', err);
+          return;
+        }
+        this.setState({
+          content: files[0].content.toString('utf8')
+        });
       });
     }, 1000);
   }
@@ -106,9 +114,14 @@ class Edit extends React.Component<{
           return alert(`Error: 0 length data received.`);
         }
         const cid = data[0].path;
-        this.setState({ cid });
+        this.setState({
+          cid,
+          isPinning: true
+        });
         this.props.cidhook.pin(cid)
-          .then(() => console.log(`cidhooked: ${data[0].path}`));
+          .then(() => console.log(`cidhooked: ${data[0].path}`))
+          .catch((err: any) => console.log('Error pinning', err))
+          .then(() => this.setState({ isPinning: false }));
       }
     );
   };
@@ -126,10 +139,16 @@ class Edit extends React.Component<{
         <DocumentPreview>
           <Container>
             <CIDBadge cid={this.state.cid} />
-            <div>
+            <Loader
+              type={'Rings'}
+              color={'#000'}
+              height={25}
+              width={25}
+            />
+            <span>
               <button onClick={() => this.pinContent(false)}>pin</button>
               <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
-            </div>
+            </span>
             </Container>
           </DocumentPreview>
         <DocumentPreview>
