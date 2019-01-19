@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "cidbadge": "^0.0.5",
-    "cidhook": "^0.1.9",
+    "cidhook": "^0.1.11",
     "ipfs": "^0.33.1",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
