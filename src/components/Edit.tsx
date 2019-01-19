@@ -1,9 +1,11 @@
 import React from 'react';
 import MDContainer from './MDContainer';
 import styled from 'styled-components';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import cidbadge from 'cidbadge';
 import _cidhook from '../stores/cidhook';
+import EthereumStore from '../stores/EthereumStore';
+import DocumentStore from '../stores/DocumentStore';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -37,10 +39,13 @@ A bit smaller
 <img src="https://media.mnn.com/assets/images/2018/07/cat_eating_fancy_ice_cream.jpg.838x0_q80.jpg" width=300 />
 `;
 
-@inject('node', 'cidhook')
+@inject('node', 'cidhook', 'documentStore', 'ethereum')
+@observer
 export default class Edit extends React.Component<{
   node: any,
-  cidhook?: _cidhook
+  cidhook?: _cidhook,
+  documentStore?: DocumentStore,
+  ethereum?: EthereumStore
 }> {
   state = {
     content: DEFAULT_TEXT,
@@ -83,14 +88,18 @@ export default class Edit extends React.Component<{
         } else if (!data.length) {
           return alert(`Error: 0 length data received.`);
         }
-        if (!dryRun) {
-          console.log(`pinned ipfs cid: ${data[0].path}`);
-        }
         const cid = data[0].path;
         this.setState({ cid });
         this.props.cidhook.pin(cid);
+        if (!dryRun) {
+          console.log(`pinned ipfs cid: ${data[0].path}`);
+        }
       }
     );
+  };
+
+  publishCid = (cid: string) => {
+    this.props.documentStore.addDocument(this.props.ethereum.activeAddress, cid);
   };
 
   render() {
@@ -99,7 +108,10 @@ export default class Edit extends React.Component<{
         <Container>
           <span dangerouslySetInnerHTML={{ __html: cidbadge(this.state.cid)}} />
           <a href={`https://ipfs.io/ipfs/${this.state.cid}`}>{this.state.cid}</a>
-          <button onClick={() => this.pinContent(false)}>pin</button>
+          <div>
+            <button onClick={() => this.pinContent(false)}>pin</button>
+            <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
+          </div>
         </Container>
         <TextInput onChange={this.contentChanged} value={this.state.content} />
         <MDContainer content={this.state.content} />

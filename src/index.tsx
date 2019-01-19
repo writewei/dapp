@@ -7,7 +7,8 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import IPFS from 'ipfs';
 import _cidhook from './stores/cidhook';
-import EthereumStore from './stores/ethereum';
+import EthereumStore from './stores/EthereumStore';
+import DocumentStore from './stores/DocumentStore';
 
 const stores = {
   node: new IPFS({
@@ -18,7 +19,8 @@ const stores = {
     }
   }),
   cidhook: new _cidhook(),
-  ethereum: new EthereumStore()
+  ethereum: new EthereumStore(),
+  documentStore: new DocumentStore()
 };
 
 Object.assign(document.body.style, {
