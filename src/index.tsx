@@ -4,9 +4,11 @@ import Home from './components/Home';
 import { Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import IPFS from 'ipfs';
+import _cidhook from './stores/cidhook';
 
 const stores = {
-  node: new IPFS()
+  node: new IPFS(),
+  cidhook: new _cidhook()
 };
 
 Object.assign(document.body.style, {
