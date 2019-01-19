@@ -7,7 +7,13 @@ import IPFS from 'ipfs';
 import _cidhook from './stores/cidhook';
 
 const stores = {
-  node: new IPFS(),
+  node: new IPFS({
+    config: {
+      Bootstrap: [
+        // '/dns4/ipfs.writewei.io/tcp/443/ipfs/QmcETnG5Ug4RnV9tTmjLkg1YabvEVw1gwQwGinCoFZLMWk'
+      ]
+    }
+  }),
   cidhook: new _cidhook()
 };
 
