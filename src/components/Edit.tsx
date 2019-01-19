@@ -2,10 +2,10 @@ import React from 'react';
 import MDContainer from './MDContainer';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import cidbadge from 'cidbadge';
 import _cidhook from '../stores/cidhook';
 import EthereumStore from '../stores/EthereumStore';
 import DocumentStore from '../stores/DocumentStore';
+import CIDBadge from './CIDBadge';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -106,7 +106,7 @@ export default class Edit extends React.Component<{
     return (
       <>
         <Container>
-          <span dangerouslySetInnerHTML={{ __html: cidbadge(this.state.cid)}} />
+          <CIDBadge cid={this.state.cid} />
           <a href={`https://ipfs.io/ipfs/${this.state.cid}`}>{this.state.cid}</a>
           <div>
             <button onClick={() => this.pinContent(false)}>pin</button>
