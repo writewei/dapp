@@ -18,7 +18,8 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'babel-loader' }
+      { test: /\.tsx?$/, loader: 'babel-loader' },
+      { test: /\.css$/, use: 'css-loader' }
     ]
   },
   plugins: [
