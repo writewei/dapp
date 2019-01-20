@@ -10,7 +10,7 @@ then
 fi
 
 # Build the web app in ./static
-npm run build
+npm run build:production
 
 # Install jsipfs
 npm i -g ipfs
