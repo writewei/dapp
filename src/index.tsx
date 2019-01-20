@@ -10,6 +10,7 @@ import _cidhook from './stores/cidhook';
 import EthereumStore from './stores/EthereumStore';
 import DocumentStore from './stores/DocumentStore';
 import styled from 'styled-components';
+import Header from './components/Header';
 
 const stores = {
   node: new IPFS({
@@ -41,9 +42,7 @@ ReactDOM.render(
     <Router>
       <Container>
         <>
-          <h1>
-            writewei
-          </h1>
+          <Header />
           <Route path="/" component={Home} exact />
           <Route path="/edit" component={Edit} />
         </>
