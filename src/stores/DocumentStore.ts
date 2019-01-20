@@ -25,6 +25,10 @@ export default class DocumentStore {
     this.loadDocuments(0, 10);
   }
 
+  get address() {
+    return this.contract.options.address;
+  }
+
   async addDocument(from: string, cid: string) {
     await this.contract.methods.createDocument(cid).send({
       from,
