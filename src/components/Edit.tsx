@@ -25,21 +25,31 @@ const DEFAULT_TEXT = `# Hi There
 
 I bet you're thinking, what is this thing.
 
-### This is a subsection
+### Write Documents
 
-- this is a bullet point
-- another level in
+This is a platform for creating and saving markdown documents on IPFS, and publishing on the Ethereum network. The buttons above can be used to pin your work (save for later), or publish (list in the smart contract).
 
+Pinning is free, publishing incurs the cost of interacting with the smart contract (< $0.50 usually).
 
-\`\`\`
-() => console.log('hello world');
-\`\`\`
+Documents are hosted for free but must be < 500 KB (~512,000 characters).
 
-![](https://media.mnn.com/assets/images/2018/07/cat_eating_fancy_ice_cream.jpg.838x0_q80.jpg)
+### Markdown Documents
 
-A bit smaller
+Support \`most\` _anything_ **that** **_you_** might need.
 
-<img src="https://media.mnn.com/assets/images/2018/07/cat_eating_fancy_ice_cream.jpg.838x0_q80.jpg" width=300 />
+It can do
+ - this
+    - that
+       - and
+         - the other
+
+[Links](google.com), images <img src="https://i.ytimg.com/vi/lFcSrYw-ARY/maxresdefault.jpg" width=500 />,
+
+### The Platform
+
+Allow users to pay Ether to written documents they find valuable. The author gets 100% of sent funds.
+
+You can pay this document with this button: <button>Pay 0.01 Ether</button>
 `;
 
 @inject('node', 'cidhook', 'documentStore', 'ethereum')
