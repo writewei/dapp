@@ -78,6 +78,7 @@ class Edit extends React.Component<{
     if (!parts.length || parts.shift() !== 'edit') return;
     if (!parts.length) return;
     const pathCid = parts[0];
+    this.setState({ content: '', cid: pathCid });
     setTimeout(() => {
       this.props.node.files.get(pathCid, (err: any, files: any) => {
         if (err) {
