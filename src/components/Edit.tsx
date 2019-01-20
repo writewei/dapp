@@ -8,12 +8,7 @@ import DocumentStore from '../stores/DocumentStore';
 import CIDBadge from './CIDBadge';
 import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
-
-const DocumentPreview = styled.div`
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
-  padding: 8px;
-  margin-top: 8px;
-`;
+import Cell from './Cell';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -138,10 +133,10 @@ class Edit extends React.Component<{
   render() {
     return (
       <>
-        <DocumentPreview>
+        <Cell>
           <TextInput onChange={this.contentChanged} value={this.state.content} />
-        </DocumentPreview>
-        <DocumentPreview>
+        </Cell>
+        <Cell>
           <Container>
             <CIDBadge cid={this.state.cid} />
             <Loader
@@ -155,10 +150,10 @@ class Edit extends React.Component<{
               <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
             </span>
             </Container>
-          </DocumentPreview>
-        <DocumentPreview>
+          </Cell>
+        <Cell>
           <MDContainer content={this.state.content} />
-        </DocumentPreview>
+        </Cell>
       </>
     );
   }
