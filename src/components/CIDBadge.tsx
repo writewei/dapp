@@ -1,11 +1,7 @@
 import React from 'react';
 import cidbadge from 'cidbadge';
 import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-
-const ClickableDiv = styled.div`
-  cursor: pointer;
-`;
+import ClickableDiv from './ClickableDiv';
 
 export default class CIDBadgeContainer extends React.Component<{
   cid: string

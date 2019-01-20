@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import DocumentStore from '../stores/DocumentStore';
 import EthereumStore from '../stores/EthereumStore';
 import { Redirect } from 'react-router-dom';
+import ClickableDiv from './ClickableDiv';
 
 const Title = styled.div`
   font-size: 32px;
@@ -39,12 +40,12 @@ export default class Header extends React.Component<{
     return (
       <Cell>
         <HFlex>
-          <div onClick={() => {
+          <ClickableDiv onClick={() => {
             this.setState({ toHome: true });
           }}>
             <Title>writewei</Title>
             <span>A decentralized writing platform</span>
-          </div>
+          </ClickableDiv>
           <ContractText>
             {'Active Contract: '}
             <a href={this.props.ethereum.etherscanUrl(this.props.documentStore.address)} target="_blank">
