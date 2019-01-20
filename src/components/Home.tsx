@@ -28,9 +28,11 @@ export default class Home extends React.Component<{
             </Cell>
           );
         })}
-        <button onClick={() => {
-          this.setState({ toEdit: true });
-        }}>Create a Document</button>
+        <Cell>
+          <button onClick={() => {
+            this.setState({ toEdit: true });
+          }}>Create a Document</button>
+        </Cell>
       </>
     );
   }
