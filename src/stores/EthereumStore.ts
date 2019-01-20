@@ -9,7 +9,7 @@ export default class EthereumStore {
   @observable currentBlockNumber: number = 0;
 
   @observable activeAddress: string;
-  @observable networkId: number = 1;
+  @observable networkId: number = 4;
 
   constructor() {
     this.blockHeaderSubscription = web3.eth.subscribe('newBlockHeaders');

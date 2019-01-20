@@ -29,7 +29,8 @@ export default class WeiDisplay extends React.Component <{
   }
 }
 
-setTimeout(async () => {
+WeiDisplay.loadEthPrice();
+setInterval(async () => {
   try {
     await WeiDisplay.loadEthPrice();
   } catch (err) {
