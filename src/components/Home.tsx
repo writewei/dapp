@@ -20,9 +20,9 @@ export default class Home extends React.Component<{
     }
     return (
       <>
-        {this.props.documentStore.documents.map((document: Document) => {
+        {this.props.documentStore.documents.map((document: Document, index: number) => {
           return (
-            <Cell key={document.cid}>
+            <Cell key={index}>
               <CIDBadge cid={document.cid} />
               <WeiDisplay wei={document.weiValue} />
             </Cell>
