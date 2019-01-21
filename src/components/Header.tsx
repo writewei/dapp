@@ -57,7 +57,7 @@ export default class Header extends React.Component<{
             this.setState({ toHome: true });
           }}>
             <Title>writewei</Title>
-            <span>A decentralized writing platform</span>
+            <span>A content sharing platform</span>
           </ClickableDiv>
           <ContractText>
             <Flex>
