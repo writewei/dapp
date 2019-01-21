@@ -29,6 +29,15 @@ export default class DocumentStore {
     return this.contract.options.address;
   }
 
+  async payDocument(from: string, index: number, etherValue: number) {
+    const weiValue = web3.utils.toWei(`${etherValue}`);
+    await this.contract.methods.payDocument(index).send({
+      from,
+      value: weiValue,
+      gas: 300000
+    });
+  }
+
   async addDocument(from: string, cid: string) {
     await this.contract.methods.createDocument(cid).send({
       from,

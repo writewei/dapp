@@ -44,6 +44,15 @@ export default class DocumentCell extends React.Component<{
             <WeiDisplay wei={this.props.document.weiValue} />
             <button onClick={() => {
               // this.props.documentStore.
+              this.props.documentStore.payDocument(
+                this.props.ethereum.activeAddress,
+                +this.props.document.index,
+                0.5
+              )
+                .then(() => {
+                  alert('Payment Completed')
+                })
+                .catch((err: any) => alert(err));
             }}>Pay Author</button>
           </VFlex>
         </HFlex>
