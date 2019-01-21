@@ -57,19 +57,25 @@ class Edit extends React.Component<{
     }
     const pathCid = parts[0];
     this.setState({ content: '', cid: pathCid, isLoading: true });
-    setTimeout(() => {
-      this.props.ipfs.node.get(pathCid, (err: any, files: any) => {
-        if (err) {
-          console.log('Error loading path cid', err);
-          this.setState({ isLoading: false });
-          return;
-        }
-        this.setState({
-          content: files[0].content.toString('utf8'),
-          isLoading: false
-        });
+    if (this.props.ipfs.isReady) {
+      this.loadCid(pathCid);
+    } else {
+      this.props.ipfs.node.once('ready', () => this.loadCid(pathCid));
+    }
+  }
+
+  loadCid(cid: string) {
+    this.props.ipfs.node.get(cid, (err: any, files: any) => {
+      if (err) {
+        console.log('Error loading path cid', err);
+        this.setState({ isLoading: false });
+        return;
+      }
+      this.setState({
+        content: files[0].content.toString('utf8'),
+        isLoading: false
       });
-    }, 5000);
+    });
   }
 
   calculateCid = () => {
