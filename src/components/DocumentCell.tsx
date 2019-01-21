@@ -4,6 +4,9 @@ import CIDBadge from './CIDBadge';
 import WeiDisplay from './WeiDisplay';
 import { Document } from '../stores/DocumentStore';
 import styled from 'styled-components';
+import { inject, observer } from 'mobx-react';
+import DocumentStore from '../stores/DocumentStore';
+import EthereumStore from '../stores/EthereumStore';
 
 const HFlex = styled.div`
   display: flex;
@@ -16,8 +19,12 @@ const VFlex = styled.div`
   justify-content: center;
 `;
 
+@inject('ethereum', 'documentStore')
+@observer
 export default class DocumentCell extends React.Component<{
-  document: Document
+  document: Document,
+  documentStore?: DocumentStore,
+  ethereum?: EthereumStore
 }> {
   render() {
     return (
@@ -25,10 +32,19 @@ export default class DocumentCell extends React.Component<{
         <HFlex>
           <VFlex>
             <CIDBadge cid={this.props.document.cid} />
+            Author:
+            <a
+              href={this.props.ethereum.etherscanUrl(this.props.document.author)}
+              target="_blank"
+            >
+              {this.props.document.author}
+            </a>
           </VFlex>
           <VFlex>
             <WeiDisplay wei={this.props.document.weiValue} />
-            <button onClick={() => {}}>Pay Author</button>
+            <button onClick={() => {
+              // this.props.documentStore.
+            }}>Pay Author</button>
           </VFlex>
         </HFlex>
       </Cell>
