@@ -21,37 +21,6 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const DEFAULT_TEXT = `# Hi There
-
-I bet you're thinking, what is this thing.
-
-### Write Documents
-
-This is a platform for creating and saving markdown documents on IPFS, and publishing on the Ethereum network. The buttons above can be used to pin your work (save for later), or publish (list in the smart contract).
-
-Pinning is free, publishing incurs the cost of interacting with the smart contract (< $0.50 usually).
-
-Documents are hosted for free but must be < 500 KB (~512,000 characters).
-
-### Markdown Documents
-
-Support \`most\` _anything_ **that** **_you_** might need.
-
-It can do
- - this
-    - that
-       - and
-         - the other
-
-[Links](google.com), images <img src="https://i.ytimg.com/vi/lFcSrYw-ARY/maxresdefault.jpg" width=500 />,
-
-### The Platform
-
-Allow users to pay Ether to written documents they find valuable. The author gets 100% of sent funds.
-
-You can pay this document with this button: <button>Pay 0.01 Ether</button>
-`;
-
 @inject('ipfs', 'cidhook', 'documentStore', 'ethereum')
 @observer
 class Edit extends React.Component<{
@@ -64,11 +33,17 @@ class Edit extends React.Component<{
   }
 }> {
   state = {
-    content: DEFAULT_TEXT,
+    content: '',
     cid: '',
     isPinning: false,
     isLoading: false
   };
+
+  _input?: HTMLTextAreaElement;
+
+  componentDidUpdate() {
+    this._input && this._input.focus();
+  }
 
   componentDidMount() {
     const { pathname } = this.props.location;
@@ -164,7 +139,7 @@ class Edit extends React.Component<{
     return (
       <>
         <Cell>
-          <TextInput onChange={this.contentChanged} value={this.state.content} />
+          <TextInput ref={c => (this._input = c)} onChange={this.contentChanged} value={this.state.content} />
         </Cell>
         <Cell>
           <Container>
