@@ -83,7 +83,7 @@ class Edit extends React.Component<{
     const pathCid = parts[0];
     this.setState({ content: '', cid: pathCid, isLoading: true });
     setTimeout(() => {
-      this.props.ipfs.node.files.get(pathCid, (err: any, files: any) => {
+      this.props.ipfs.node.get(pathCid, (err: any, files: any) => {
         if (err) {
           console.log('Error loading path cid', err);
           this.setState({ isLoading: false });
@@ -94,11 +94,11 @@ class Edit extends React.Component<{
           isLoading: false
         });
       });
-    }, 1000);
+    }, 5000);
   }
 
   calculateCid = () => {
-    this.props.ipfs.node.files.add(
+    this.props.ipfs.node.add(
       Buffer.from(this.state.content, 'utf8'),
       {
         onlyHash: true
@@ -118,7 +118,7 @@ class Edit extends React.Component<{
   };
 
   pinContent = (dryRun: boolean = true) => {
-    this.props.ipfs.node.files.add(
+    this.props.ipfs.node.add(
       Buffer.from(this.state.content, 'utf8'),
       {
         onlyHash: dryRun
