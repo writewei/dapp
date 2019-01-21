@@ -15,7 +15,7 @@
   "dependencies": {
     "cidbadge": "0.0.6",
     "cidhook": "^0.1.12",
-    "ipfs": "^0.33.1",
+    "ipfs": "^0.34.0",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "react": "^16.7.0",
