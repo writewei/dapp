@@ -66,7 +66,8 @@ class Edit extends React.Component<{
   state = {
     content: DEFAULT_TEXT,
     cid: '',
-    isPinning: false
+    isPinning: false,
+    isLoading: false
   };
 
   componentDidMount() {
@@ -78,15 +79,17 @@ class Edit extends React.Component<{
     if (!parts.length || parts.shift() !== 'edit') return;
     if (!parts.length) return;
     const pathCid = parts[0];
-    this.setState({ content: '', cid: pathCid });
+    this.setState({ content: '', cid: pathCid, isLoading: true });
     setTimeout(() => {
       this.props.ipfs.node.files.get(pathCid, (err: any, files: any) => {
         if (err) {
           console.log('Error loading path cid', err);
+          this.setState({ isLoading: false });
           return;
         }
         this.setState({
-          content: files[0].content.toString('utf8')
+          content: files[0].content.toString('utf8'),
+          isLoading: false
         });
       });
     }, 1000);
@@ -142,6 +145,19 @@ class Edit extends React.Component<{
   };
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <Cell>
+          {`Loading cid: ${this.state.cid}`}
+          <Loader
+            type={'Rings'}
+            color={'#000'}
+            height={50}
+            width={50}
+          />
+        </Cell>
+      );
+    }
     return (
       <>
         <Cell>
@@ -150,18 +166,12 @@ class Edit extends React.Component<{
         <Cell>
           <Container>
             <CIDBadge cid={this.state.cid} />
-            <Loader
-              type={'Rings'}
-              color={'#000'}
-              height={25}
-              width={25}
-            />
             <span>
               <button onClick={() => this.pinContent(false)}>pin</button>
               <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
             </span>
-            </Container>
-          </Cell>
+          </Container>
+        </Cell>
         <Cell>
           <MDContainer content={this.state.content} />
         </Cell>
