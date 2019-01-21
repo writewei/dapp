@@ -52,10 +52,10 @@ Allow users to pay Ether to written documents they find valuable. The author get
 You can pay this document with this button: <button>Pay 0.01 Ether</button>
 `;
 
-@inject('node', 'cidhook', 'documentStore', 'ethereum')
+@inject('ipfs', 'cidhook', 'documentStore', 'ethereum')
 @observer
 class Edit extends React.Component<{
-  node: any,
+  ipfs: any,
   cidhook?: _cidhook,
   documentStore?: DocumentStore,
   ethereum?: EthereumStore,
@@ -80,7 +80,7 @@ class Edit extends React.Component<{
     const pathCid = parts[0];
     this.setState({ content: '', cid: pathCid });
     setTimeout(() => {
-      this.props.node.files.get(pathCid, (err: any, files: any) => {
+      this.props.ipfs.node.files.get(pathCid, (err: any, files: any) => {
         if (err) {
           console.log('Error loading path cid', err);
           return;
@@ -93,7 +93,7 @@ class Edit extends React.Component<{
   }
 
   calculateCid = () => {
-    this.props.node.files.add(
+    this.props.ipfs.node.files.add(
       Buffer.from(this.state.content, 'utf8'),
       {
         onlyHash: true
@@ -113,7 +113,7 @@ class Edit extends React.Component<{
   };
 
   pinContent = (dryRun: boolean = true) => {
-    this.props.node.files.add(
+    this.props.ipfs.node.files.add(
       Buffer.from(this.state.content, 'utf8'),
       {
         onlyHash: dryRun

@@ -5,23 +5,16 @@ import Home from './components/Home';
 import Edit from './components/Edit';
 import { Provider } from 'mobx-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import IPFS from 'ipfs';
 import _cidhook from './stores/cidhook';
 import EthereumStore from './stores/EthereumStore';
 import DocumentStore from './stores/DocumentStore';
+import IPFSStore from './stores/IPFSStore';
 import styled from 'styled-components';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 const stores = {
-  node: new IPFS({
-    config: {
-      Bootstrap: [
-        // '/dns4/ipfs.writewei.io/tcp/443/ipfs/QmcETnG5Ug4RnV9tTmjLkg1YabvEVw1gwQwGinCoFZLMWk'
-        // '/ip4/127.0.0.1/tcp/4003/ws/ipfs/QmSGen7cLwrzPww5DJXTERRAxHxn3Jjay6asyVaNhwnLjo'
-      ]
-    }
-  }),
+  ipfs: new IPFSStore(),
   cidhook: new _cidhook(),
   ethereum: new EthereumStore(),
   documentStore: new DocumentStore()

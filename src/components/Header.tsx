@@ -21,11 +21,24 @@ const HFlex = styled.div`
   justify-content: space-between;
 `;
 
-@inject('ethereum', 'documentStore')
+const Flex = styled.div`
+  display: flex;
+`;
+
+const Circle = styled.div`
+  background: ${(props: { on: boolean }) => props.on ? 'green' : 'red'};
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 4px;
+`;
+
+@inject('ethereum', 'documentStore', 'ipfs')
 @observer
 export default class Header extends React.Component<{
   documentStore?: DocumentStore,
-  ethereum?: EthereumStore
+  ethereum?: EthereumStore,
+  ipfs?: any
 }> {
   state = {
     toHome: false
@@ -47,10 +60,16 @@ export default class Header extends React.Component<{
             <span>A decentralized writing platform</span>
           </ClickableDiv>
           <ContractText>
-            {'Active Contract: '}
-            <a href={this.props.ethereum.etherscanUrl(this.props.documentStore.address)} target="_blank">
-              {this.props.documentStore.address}
-            </a>
+            <Flex>
+              {'Active Contract: '}
+              <a href={this.props.ethereum.etherscanUrl(this.props.documentStore.address)} target="_blank">
+                {this.props.documentStore.address}
+              </a>
+            </Flex>
+            <Flex>
+              <Circle on={this.props.ipfs.isReady} />
+              {this.props.ipfs.isReady ? 'IPFS node running' : 'IPFS node starting'}
+            </Flex>
           </ContractText>
         </HFlex>
       </Cell>
