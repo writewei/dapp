@@ -1,10 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import DocumentStore, { Document } from '../stores/DocumentStore';
-import CIDBadge from './CIDBadge';
-import WeiDisplay from './WeiDisplay';
 import Cell from './Cell';
 import { Redirect } from 'react-router-dom';
+import DocumentCell from './DocumentCell';
 
 @inject('ethereum', 'documentStore')
 @observer
@@ -21,12 +20,7 @@ export default class Home extends React.Component<{
     return (
       <>
         {this.props.documentStore.documents.map((document: Document, index: number) => {
-          return (
-            <Cell key={index}>
-              <CIDBadge cid={document.cid} />
-              <WeiDisplay wei={document.weiValue} />
-            </Cell>
-          );
+          return <DocumentCell key={index} document={document} />;
         })}
         <Cell>
           <button onClick={() => {
