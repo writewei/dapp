@@ -134,6 +134,7 @@ class Edit extends React.Component<{
           cid,
           isPinning: true
         });
+        console.log('Sending pin request for ', cid);
         this.props.cidhook.pin(cid)
           .then(() => console.log(`cidhooked: ${data[0].path}`))
           .catch((err: any) => console.log('Error pinning', err))
