@@ -71,13 +71,15 @@ class Edit extends React.Component<{
   };
 
   componentDidMount() {
-    this.calculateCid();
-
     const { pathname } = this.props.location;
     // Example pathname: /edit/cid
     const parts = pathname.split('/').filter(_ => _);
     if (!parts.length || parts.shift() !== 'edit') return;
-    if (!parts.length) return;
+    if (!parts.length) {
+      // No CID is specified in path
+      this.calculateCid();
+      return;
+    }
     const pathCid = parts[0];
     this.setState({ content: '', cid: pathCid, isLoading: true });
     setTimeout(() => {
