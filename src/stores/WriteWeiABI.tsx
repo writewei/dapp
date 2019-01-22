@@ -4,10 +4,10 @@ export default [
     "inputs": [
       {
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
-    "name": "documentBalances",
+    "name": "authorBalances",
     "outputs": [
       {
         "name": "",
@@ -45,17 +45,41 @@ export default [
         "type": "uint256"
       },
       {
-        "name": "updatedTimestamp",
+        "name": "weiValue",
         "type": "uint256"
       },
       {
-        "name": "weiValue",
-        "type": "uint256"
+        "name": "isDeleted",
+        "type": "bool"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "DocumentUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "target",
+        "type": "address"
+      }
+    ],
+    "name": "BalanceUpdated",
+    "type": "event"
   },
   {
     "constant": false,
@@ -77,13 +101,9 @@ export default [
       {
         "name": "index",
         "type": "uint256"
-      },
-      {
-        "name": "_cid",
-        "type": "string"
       }
     ],
-    "name": "updateDocument",
+    "name": "deleteDocument",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -105,34 +125,11 @@ export default [
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "name": "index",
-        "type": "uint256"
-      },
-      {
-        "name": "receiver",
-        "type": "address"
-      }
-    ],
-    "name": "withdrawDocumentBalance",
+    "inputs": [],
+    "name": "withdraw",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "documentUpdateCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
