@@ -20,7 +20,7 @@ export default class DocumentStore {
   }
 
   reloadContract() {
-    this.contract = new web3.eth.Contract(ABI, '0xcee8f13dfcbc78d6fc6f32ef0a67be92f2b71da1');
+    this.contract = new web3.eth.Contract(ABI, '0x08203e71f3b8b3eb32e766cae9a105462148c292');
     this.documents = [];
     this.loadDocuments(0, 10);
   }
