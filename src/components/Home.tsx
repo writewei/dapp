@@ -1,9 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import DocumentStore, { Document } from '../stores/DocumentStore';
-import Cell from './Cell';
 import { Redirect } from 'react-router-dom';
 import DocumentCell from './DocumentCell';
+import { Container } from './Shared';
 
 @inject('ethereum', 'documentStore')
 @observer
@@ -22,11 +22,11 @@ export default class Home extends React.Component<{
         {this.props.documentStore.documents.map((document: Document, index: number) => {
           return <DocumentCell key={index} document={document} />;
         })}
-        <Cell>
+        <Container>
           <button onClick={() => {
             this.setState({ toEdit: true });
           }}>Create a Document</button>
-        </Cell>
+        </Container>
       </>
     );
   }

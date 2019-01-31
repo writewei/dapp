@@ -8,7 +8,7 @@ import DocumentStore from '../stores/DocumentStore';
 import CIDBadge from './CIDBadge';
 import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
-import Cell from './Cell';
+import { BlockContainer } from './Shared';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -131,7 +131,7 @@ class Edit extends React.Component<{
   render() {
     if (this.state.isLoading) {
       return (
-        <Cell>
+        <BlockContainer>
           {`Loading cid: ${this.state.cid}`}
           <Loader
             type={'Rings'}
@@ -139,15 +139,15 @@ class Edit extends React.Component<{
             height={50}
             width={50}
           />
-        </Cell>
+        </BlockContainer>
       );
     }
     return (
       <>
-        <Cell>
+        <BlockContainer>
           <TextInput ref={c => (this._input = c)} onChange={this.contentChanged} value={this.state.content} />
-        </Cell>
-        <Cell>
+        </BlockContainer>
+        <BlockContainer>
           <Container>
             <CIDBadge cid={this.state.cid} />
             <span>
@@ -155,10 +155,10 @@ class Edit extends React.Component<{
               <button onClick={() => this.publishCid(this.state.cid)}>publish</button>
             </span>
           </Container>
-        </Cell>
-        <Cell>
+        </BlockContainer>
+        <BlockContainer>
           <MDContainer content={this.state.content} />
-        </Cell>
+        </BlockContainer>
       </>
     );
   }

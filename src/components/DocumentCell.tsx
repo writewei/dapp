@@ -1,23 +1,11 @@
 import React from 'react';
-import Cell from './Cell';
 import CIDBadge from './CIDBadge';
 import WeiDisplay from './WeiDisplay';
 import { Document } from '../stores/DocumentStore';
-import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
 import DocumentStore from '../stores/DocumentStore';
 import EthereumStore from '../stores/EthereumStore';
-
-const HFlex = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const VFlex = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+import { HFlex, VFlex, BlockContainer } from './Shared';
 
 @inject('ethereum', 'documentStore')
 @observer
@@ -28,7 +16,7 @@ export default class DocumentCell extends React.Component<{
 }> {
   render() {
     return (
-      <Cell>
+      <BlockContainer>
         <HFlex>
           <VFlex>
             <CIDBadge cid={this.props.document.cid} />
@@ -56,7 +44,7 @@ export default class DocumentCell extends React.Component<{
             }}>Pay Author</button>
           </VFlex>
         </HFlex>
-      </Cell>
+      </BlockContainer>
     );
   }
 }

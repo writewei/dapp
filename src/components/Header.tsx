@@ -1,11 +1,11 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import Cell from './Cell';
 import styled from 'styled-components';
 import DocumentStore from '../stores/DocumentStore';
 import EthereumStore from '../stores/EthereumStore';
 import { Redirect } from 'react-router-dom';
 import ClickableDiv from './ClickableDiv';
+import { Flex, HFlex, BlockContainer } from './Shared';
 
 const Title = styled.div`
   font-size: 32px;
@@ -14,15 +14,6 @@ const Title = styled.div`
 
 const ContractText = styled.div`
   font-size: 12px;
-`;
-
-const HFlex = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Flex = styled.div`
-  display: flex;
 `;
 
 const Circle = styled.div`
@@ -47,11 +38,9 @@ export default class Header extends React.Component<{
     if (this.state.toHome) this.setState({ toHome: false });
   }
   render() {
-    if (this.state.toHome) {
-      return <Redirect to='/' />;
-    }
+    if (this.state.toHome) return <Redirect to='/' />;
     return (
-      <Cell>
+      <BlockContainer>
         <HFlex>
           <ClickableDiv onClick={() => {
             this.setState({ toHome: true });
@@ -72,7 +61,7 @@ export default class Header extends React.Component<{
             </Flex>
           </ContractText>
         </HFlex>
-      </Cell>
+      </BlockContainer>
     );
   }
 }
