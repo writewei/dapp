@@ -9,9 +9,9 @@ import _cidhook from './stores/cidhook';
 import EthereumStore from './stores/EthereumStore';
 import DocumentStore from './stores/DocumentStore';
 import IPFSStore from './stores/IPFSStore';
-import styled from 'styled-components';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Container } from './components/Shared';
 
 const stores = {
   ipfs: new IPFSStore(),
@@ -26,10 +26,6 @@ Object.assign(document.body.style, {
   'max-width': '900px',
   'font-family': 'Helvetica',
 });
-
-const Container = styled.div`
-  margin: 8px;
-`;
 
 ReactDOM.render(
   <Provider { ...stores }>
