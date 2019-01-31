@@ -7,6 +7,7 @@ export const Container = styled.div`
 
 export const BlockContainer = styled.div`
   margin: 8px;
+  padding: 8px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px;
 `;
 
