@@ -38,6 +38,10 @@ export const BlockFooter = styled.div`
   background-color: white;
 `;
 
+export const Flex = styled.div`
+  display: flex;
+`;
+
 export const HFlex = styled.div`
   display: flex;
   flex-direction: row;
