@@ -1,13 +1,17 @@
 import { observable } from 'mobx';
 import ABI from './WriteWeiABI';
 
-export interface Document {
+export class Document {
   index: string|number;
   cid: string;
   author: string;
   timestamp: string|number;
-  updatedTimestamp: string|number;
   weiValue: string;
+
+  constructor(options = {}) {
+    Object.assign(this, options);
+  }
+
 }
 
 export default class DocumentStore {
@@ -60,7 +64,7 @@ export default class DocumentStore {
       const promise = this.contract.methods.documents(x).call()
         .then((document: Document) => {
           document.index = x;
-          return document;
+          return new Document(document);
         });
       promises.push(promise);
     }
