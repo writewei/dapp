@@ -9,6 +9,7 @@ import CIDBadge from './CIDBadge';
 import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner'
 import { BlockContainer } from './Shared';
+import multihash from 'multihashes';
 
 const TextInput = styled.textarea`
   width: 100%;
@@ -99,29 +100,23 @@ class Edit extends React.Component<{
   };
 
   pinContent = (dryRun: boolean = true) => {
-    this.props.ipfs.node.add(
-      Buffer.from(this.state.content, 'utf8'),
-      {
-        onlyHash: dryRun
-      },
-      (err: any, data: any) => {
-        if (err) {
-          return alert(`Error: ${err}`);
-        } else if (!data.length) {
-          return alert(`Error: 0 length data received.`);
+    Promise.resolve()
+      .then(() => {
+        if (dryRun) {
+          const data = new multihash.Buffer('0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33');
+          return multihash.encode(data);
         }
-        const cid = data[0].path;
+        return this.props.cidhook.add(this.state.content);
+      })
+      .then(({ cid }) => {
         this.setState({
           cid,
-          isPinning: true
+          isPinning: false
         });
-        console.log('Sending pin request for ', cid);
-        this.props.cidhook.pin(cid)
-          .then(() => console.log(`cidhooked: ${data[0].path}`))
-          .catch((err: any) => console.log('Error pinning', err))
-          .then(() => this.setState({ isPinning: false }));
-      }
-    );
+      })
+      .catch(err => {
+        if (err) return alert(`Error: ${err}`);
+      });
   };
 
   publishCid = (cid: string) => {

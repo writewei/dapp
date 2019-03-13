@@ -37,9 +37,7 @@ export default class DocumentCell extends React.Component<{
                 +this.props.document.index,
                 0.5
               )
-                .then(() => {
-                  alert('Payment Completed')
-                })
+                .then(() => alert('Payment Completed'))
                 .catch((err: any) => alert(err));
             }}>Pay Author</button>
           </VFlex>

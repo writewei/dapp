@@ -22,7 +22,7 @@ const stores = {
 
 Object.assign(document.body.style, {
   margin: 'auto',
-  'background-color': '#fff',
+  'background-color': 'hsl(220, 13%, 18%)',
   'max-width': '900px',
   'font-family': 'Helvetica',
 });
