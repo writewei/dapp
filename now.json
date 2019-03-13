@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "writewei-dapp",
+  "alias": ["writewei.io"],
+  "builds": [
+    { "src": "static/index.html", "use": "@now/html-minifier" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/static/index.html" }
+  ]
+}
