@@ -16,7 +16,7 @@
   "dependencies": {
     "cidbadge": "0.0.6",
     "cidhook": "^0.1.12",
-    "ipfs": "^0.34.0",
+    "ipfs": "^0.66.1",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "multihashes": "^0.4.14",
@@ -25,7 +25,7 @@
     "react-loader-spinner": "^2.3.0",
     "react-router-dom": "^4.3.1",
     "remarkable": "^1.7.1",
-    "web3": "^1.0.0-beta.37"
+    "web3": "^1.10.4"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
